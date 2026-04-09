@@ -66,6 +66,13 @@ async def _check_entries():
 async def _auto_entry_for_user(user_id, settings):
     """Evaluate opportunities and place orders for a single user."""
     async with async_session() as db:
+        # Plan check: only Pro users can auto-trade
+        from app.models.user import User
+        result = await db.execute(select(User).where(User.id == user_id))
+        user = result.scalar_one_or_none()
+        if not user or user.plan != "pro":
+            return "plan_not_pro"
+
         # Safety: daily loss reset
         today = datetime.now(JST).strftime("%Y-%m-%d")
         if settings.daily_loss_date != today:
