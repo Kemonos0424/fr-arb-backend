@@ -12,7 +12,7 @@ from app.schemas.settings import SettingsResponse, SettingsUpdate
 router = APIRouter(prefix="/api/settings", tags=["settings"])
 
 
-@router.get("/", response_model=SettingsResponse)
+@router.get("", response_model=SettingsResponse)
 async def get_settings(
     user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
@@ -24,7 +24,7 @@ async def get_settings(
     return s
 
 
-@router.put("/", response_model=SettingsResponse)
+@router.put("", response_model=SettingsResponse)
 async def update_settings(
     req: SettingsUpdate,
     user: User = Depends(get_current_user),

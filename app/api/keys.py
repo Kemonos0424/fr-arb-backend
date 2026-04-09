@@ -16,7 +16,7 @@ router = APIRouter(prefix="/api/keys", tags=["keys"])
 SUPPORTED_EXCHANGES = {"bingx", "bitget", "bitmart"}
 
 
-@router.get("/", response_model=list[ApiKeyStatus])
+@router.get("", response_model=list[ApiKeyStatus])
 async def list_keys(
     user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),

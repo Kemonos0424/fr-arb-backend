@@ -22,6 +22,7 @@ app = FastAPI(
     description="Funding Rate arbitrage trading platform",
     version="0.1.0",
     lifespan=lifespan,
+    redirect_slashes=False,
 )
 
 origins = [o.strip() for o in settings.frontend_url.split(",") if o.strip()]
