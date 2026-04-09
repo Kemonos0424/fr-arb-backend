@@ -5,7 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import settings
 from app.database import engine, Base
-from app.api import auth, keys, settings as settings_api, dashboard, scan, trade
+from app.api import auth, keys, settings as settings_api, dashboard, scan, trade, signals, tokens
 
 
 @asynccontextmanager
@@ -41,6 +41,8 @@ app.include_router(settings_api.router)
 app.include_router(dashboard.router)
 app.include_router(scan.router)
 app.include_router(trade.router)
+app.include_router(signals.router)
+app.include_router(tokens.router)
 
 
 @app.get("/api/health")
